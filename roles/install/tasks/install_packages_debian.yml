@@ -1,0 +1,16 @@
+---
+- name:
+  apt:
+    state: present
+    name:
+      - php-intl
+      - php-mbstring
+      - php-json
+      - php-xmlrpc
+      - php-soap
+      - php-soap
+      - php-gd
+      - php-xml
+      - php-cli
+      - php-zip
+      - php-curl

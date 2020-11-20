@@ -1,0 +1,6 @@
+---
+# tasks file for configure
+- name: Template configuration file
+  template:
+    src: conf.php.jinja2
+    dest: "{{ dolibarr_main_document_root }}/conf/conf.php"

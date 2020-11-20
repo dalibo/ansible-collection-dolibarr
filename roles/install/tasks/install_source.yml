@@ -1,0 +1,26 @@
+---
+# tasks file for install dolibarr
+- name: Clone repository
+  ansible.builtin.git:
+    repo: https://github.com/Dolibarr/dolibarr.git
+    version: "{{ dolibarr_version }}"
+    depth: 1
+    dest: "/usr/local/src/dolibarr_{{ dolibarr_version }}"
+
+- name: Synchronize source code to web server directory
+  synchronize:
+    src: "/usr/local/src/dolibarr_{{ dolibarr_version }}/htdocs/"
+    dest: "{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/"
+  delegate_to: "{{ inventory_hostname }}"
+
+- name: Create empty configuration file
+  ansible.builtin.file:
+    path: "{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/conf/conf.php"
+    state: touch
+
+- name: Set web server owner of dolibarr files
+  file:
+    path: "{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}"
+    owner: "{{ dolibarr_http_user }}"
+    group: "{{ dolibarr_http_group }}"
+    mode: '0755'

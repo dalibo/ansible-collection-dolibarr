@@ -1,0 +1,5 @@
+---
+- name: Include install packages
+  include: install_packages_debian.yml
+- name: Include install source
+  include: install_source.yml
