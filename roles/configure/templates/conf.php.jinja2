@@ -1,21 +1,31 @@
 <?php
 
-$dolibarr_main_url_root='{{ dolibarr_http_proto}}://{{ dolibarr_main_url_root }}';
+$dolibarr_main_url_root='{{ dolibarr_http_proto }}://{{ dolibarr_domain }}';
 $dolibarr_main_document_root='{{ dolibarr_main_document_root }}';
 $dolibarr_main_data_root='{{ dolibarr_main_data_root }}';
-$dolibarr_main_db_host='{{ dolibarr_main_db_host|default('localhost') }}';
-$dolibarr_main_db_port='{{ dolibarr_main_db_port|default('3306') }}';
-$dolibarr_main_db_name='{{ dolibarr_main_db_name|default('dolibarr') }}';
-$dolibarr_main_db_user='{{ dolibarr_main_db_user|default('dolibarr') }}';
-$dolibarr_main_db_pass='{{ dolibarr_main_db_pass|default('') }}';
-$dolibarr_main_db_type='{{ dolibarr_main_db_type|default('mysql')}}';
+$dolibarr_main_db_host='{{ dolibarr_main_db_host }}';
+$dolibarr_main_db_port='{{ dolibarr_main_db_port }}';
+$dolibarr_main_db_name='{{ dolibarr_main_db_name }}';
+$dolibarr_main_db_user='{{ dolibarr_main_db_user }}';
+$dolibarr_main_db_pass='{{ dolibarr_main_db_pass }}';
+$dolibarr_main_db_type='{{ dolibarr_main_db_type }}';
+
+{% if dolibarr_main_db_type == 'mysqli' %}
+
 $dolibarr_main_db_character_set='utf8';
 $dolibarr_main_db_collation='utf8_unicode_ci';
+$dolibarr_main_restrict_os_commands='mysqldump, mysql';
+
+{% elif dolibarr_main_db_type == 'pgsql' %}
+
+$dolibarr_main_restrict_os_commands='pg_dump, pgrestore';
+
+{% endif %}
+
 $dolibarr_main_instance_unique_id='84b5bc91f83b56e458db71e0adac2b62';
 $dolibarr_main_authentication='dolibarr';
 $dolibarr_main_force_https='0';
 $dolibarr_main_prod='0';
-$dolibarr_main_restrict_os_commands='mysqldump, mysql, pg_dump, pgrestore';
 $dolibarr_main_restrict_ip='';
 $dolibarr_nocsrfcheck='0';
 

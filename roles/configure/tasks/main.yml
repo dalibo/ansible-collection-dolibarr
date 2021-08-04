@@ -1,6 +1,36 @@
 ---
 # tasks file for configure
 - name: Template configuration file
-  template:
+  ansible.builtin.template:
     src: conf.php.jinja2
-    dest: "{{ dolibarr_main_document_root }}/conf/conf.php"
+    dest: "{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/conf/conf.php"
+
+- name: Run step1.php to init the database
+  ansible.builtin.command:
+    cmd: |
+      php step1.php set fr {{ dolibarr_main_document_root }}
+      {{ dolibarr_main_data_root }}
+      {{ dolibarr_http_proto }}://{{ dolibarr_domain }}
+      root root
+      {{ dolibarr_main_db_type }} {{ dolibarr_main_db_host }}
+      {{ dolibarr_main_db_name }} {{ dolibarr_main_db_user }} 
+      {{ dolibarr_main_db_pass }} {{ dolibarr_main_db_port }} llx_
+    chdir: "{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/install/"
+    creates: "{{ dolibarr_main_data_root }}/install.lock"
+  become: yes
+  become_user: "{{ dolibarr_http_user }}"
+
+- name: Run step2.php to init the database
+  ansible.builtin.command:
+    cmd: php step2.php set
+    chdir: "{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/install/"
+    creates: "{{ dolibarr_main_data_root }}/install.lock"
+  become: yes
+  become_user: "{{ dolibarr_http_user }}"
+      
+- name: Lock install and upgrade process
+  ansible.builtin.file:
+    path: "{{ dolibarr_main_data_root }}/install.lock"
+    state: touch
+    owner: root
+    group: root
