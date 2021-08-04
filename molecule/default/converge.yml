@@ -1,0 +1,35 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    php_packages_extra: [libapache2-mod-php]
+    apache_vhosts:
+      - servername: "dolibarr.example.com"
+        documentroot: "/var/www/dolibarr.example.com"
+    mysql_databases:
+      - name: dolibarr
+    mysql_users:
+      - name: dolibarr
+        host: "%"
+        password: dolibarr
+        priv: "dolibarr.*:ALL"
+  pre_tasks:
+    - name: Update apt cache.
+      apt: update_cache=yes cache_valid_time=600
+      when: ansible_os_family == 'Debian'
+      changed_when: false
+    - name: Install GPG
+      apt:
+        name:
+          - gpg
+          - git
+          - rsync
+        state: present
+      when: ansible_os_family == 'Debian'
+      changed_when: false
+  roles:
+    - {role: geerlingguy.php}
+    - {role: geerlingguy.apache}
+    - {role: geerlingguy.mysql}
+    - {role: install}
+    - {role: configure}

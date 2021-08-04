@@ -1,0 +1,7 @@
+roles:
+  - name: geerlingguy.apache
+    version: master
+  - name: geerlingguy.php
+    version: master
+  - name: geerlingguy.mysql
+    version: master
