@@ -7,8 +7,16 @@
     depth: 1
     dest: "/usr/local/src/dolibarr_{{ dolibarr_version }}"
 
+- name: Create Dolibarr install directory
+  ansible.builtin.file:
+    dest: "{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/"
+    state: directory
+    owner: "{{ dolibarr_http_user }}"
+    group: "{{ dolibarr_http_group }}"
+    recurse: true
+
 - name: Synchronize source code to web server directory
-  synchronize:
+  ansible.posix.synchronize:
     src: "/usr/local/src/dolibarr_{{ dolibarr_version }}/htdocs/"
     dest: "{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/"
   delegate_to: "{{ inventory_hostname }}"
@@ -19,7 +27,7 @@
     state: touch
 
 - name: Set web server owner of dolibarr files
-  file:
+  ansible.builtin.file:
     path: "{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}"
     owner: "{{ dolibarr_http_user }}"
     group: "{{ dolibarr_http_group }}"
