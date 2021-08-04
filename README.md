@@ -1,18 +1,17 @@
 # Ansible Collection - l00ptr.dolibarr
 
 ## Description
-This collection provides roles to :
- - Install
- - Configure
- - Upgrade 
- - Sync
+This collection provides a few roles to manage your Dolibarr instances.
 
-Your Dolibarr instances. 
-
+Currently we provide those roles :
+ - [Install](docs/role_install.md)
+ - [Configure](docs/role_configure.md)
+ - [Upgrade](docs/role_upgrade.md) 
+ - [Sync](docs/role_sync.md)
 
 We try to keep variable name consistent between the roles composing this collection.
 
-This collection is currently only available for Debian 9 and 10.
+This collection is currently only tested on Debian 9 and 10.
 
 ## Tested with Ansible
 
