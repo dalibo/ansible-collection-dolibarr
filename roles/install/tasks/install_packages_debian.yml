@@ -1,5 +1,5 @@
 ---
-- name:
+- name: Install PHP common packages
   apt:
     state: present
     name:
@@ -14,3 +14,17 @@
       - php-cli
       - php-zip
       - php-curl
+
+- name: Install PHP pgsql package
+  apt:
+    state: present
+    name:
+      - php-pgsql
+  when: dolibarr_main_db_type == 'pgsql'
+
+- name: Install PHP pgsql package
+  apt:
+    state: present
+    name:
+      - php-mysql
+  when: dolibarr_main_db_type == 'mysqli'

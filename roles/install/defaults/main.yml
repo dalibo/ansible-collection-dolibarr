@@ -6,3 +6,4 @@ dolibarr_domain: dolibarr.example.com
 dolibarr_http_user: www-data
 dolibarr_http_group: www-data
 dolibarr_http_proto: https
+dolibarr_main_db_type: mysqli
