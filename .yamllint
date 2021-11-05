@@ -9,3 +9,4 @@ rules:
 
 ignore: |
   .github/*
+  .github/workflows/*

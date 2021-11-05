@@ -6,4 +6,3 @@
     dest: "{{ dolibarr_sync_directory_dest }}"
     rsync_opts: "{{ dolibarr_sync_directory_rsync_options }}"
   delegate_to: "{{ dolibarr_sync_src_host }}"
-

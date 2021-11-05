@@ -1,3 +1,4 @@
+---
 - name: Set Facts temp directory
   set_fact:
     temp_dir: "/tmp/ansible-dolibarr-{{dolibarr_env}}-upgrade-{{  ansible_date_time.epoch }}-{{ dolibarr_version }}"

@@ -1,9 +1,10 @@
+---
 ### REQUIRED
 
 # The namespace of the collection. This can be a company/brand/organization or product namespace under which all
 # content lives. May only contain alphanumeric characters and underscores. Additionally namespaces cannot start with
 # underscores or numbers and cannot contain consecutive underscores
-namespace: l00ptr 
+namespace: l00ptr
 
 # The name of the collection. Has the same character restrictions as 'namespace'
 name: dolibarr
@@ -17,7 +18,7 @@ readme: README.md
 # A list of the collection's content authors. Can be just the name or in the format 'Full Name <email> (url)
 # @nicks:irc/im.site#channel'
 authors:
-- julian.vandenbroeck@dalibo.com
+  - julian.vandenbroeck@dalibo.com
 
 
 ### OPTIONAL but strongly recommended
@@ -28,7 +29,7 @@ description: Allow to manage the lifecycle of Dolibarr (install, upgrade, sync,.
 # Either a single license or a list of licenses for content inside of a collection. Ansible Galaxy currently only
 # accepts L(SPDX,https://spdx.org/licenses/) licenses. This key is mutually exclusive with 'license_file'
 license:
-- MIT
+  - MIT
 
 # The path to the license file for the collection. This path is relative to the root of the collection. This key is
 # mutually exclusive with 'license'
