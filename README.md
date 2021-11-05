@@ -17,6 +17,9 @@ This collection is currently only tested on Debian 9 and 10.
 
 2.10
 
+For more information about our testing procedure, you can read the the 
+[dedicated howto](docs/testing.md)
+
 ## Included content
 ## Using this collection
 
