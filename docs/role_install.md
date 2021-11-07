@@ -1,10 +1,10 @@
-# Ansible role dolibarr install
+# Ansible role Dolibarr install
 
-An Ansible Role that installs Dolibarr on Debian 9 and 10.
+An Ansible Role that installs Dolibarr on Debian 10 and 11.
 
 ## Role Variables
 
-    dolibarr_version: 13.0
+    dolibarr_version: 12.0
 
 Version of Dolibarr we want to install on our managed remote host.
 
