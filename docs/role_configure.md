@@ -1,6 +1,6 @@
-# Ansible role dolibarr install
+# Ansible role Dolibarr configure
 
-An Ansible role dedicated to configure Dolibarr installed on Debian 9 an 10. 
+An Ansible role dedicated to configure Dolibarr installed on Debian 10 and 11. 
 
 The idea behind this role is to run the steps required to build a running 
 instance of Dolibarr after installing the source code.
