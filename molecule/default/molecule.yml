@@ -17,24 +17,9 @@ platforms:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
 provisioner:
   name: ansible
-  lint:
-    name: ansible-lint
 verifier:
   name: ansible
-scenario:
-  test_sequence:
-    - dependency
-    - lint
-    - cleanup
-    - destroy
-    - syntax
-    - create
-    - prepare
-    - converge
-    # - idempotence
-    - side_effect
-    - verify
-    - cleanup
-    - destroy
+  playbooks:
+    converge: ${MOLECULE_PLAYBOOK:-converge.yml}
 env:
   ANSIBLE_ROLES_PATH: ${MOLECULE_PROJECT_DIRECTORY}/roles
