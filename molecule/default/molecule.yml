@@ -17,9 +17,10 @@ platforms:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
 provisioner:
   name: ansible
+  env:
+    ANSIBLE_ROLES_PATH: ${MOLECULE_PROJECT_DIRECTORY}/roles
+  log: True
 verifier:
   name: ansible
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
-env:
-  ANSIBLE_ROLES_PATH: ${MOLECULE_PROJECT_DIRECTORY}/roles
