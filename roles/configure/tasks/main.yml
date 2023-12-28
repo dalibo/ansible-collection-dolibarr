@@ -13,6 +13,9 @@
   ansible.builtin.template:
     src: conf.php.jinja2
     dest: "{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/conf/conf.php"
+    owner: "{{ dolibarr_http_user }}"
+    group: "{{ dolibarr_http_user }}"
+    mode: "0740"
 
 - name: Run step1.php to init the database
   ansible.builtin.command:
@@ -43,3 +46,4 @@
     state: touch
     owner: root
     group: root
+    mode: "0444"
