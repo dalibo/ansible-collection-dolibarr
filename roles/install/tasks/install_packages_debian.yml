@@ -24,7 +24,7 @@
       - php-pgsql
   when: dolibarr_main_db_type == 'pgsql'
 
-- name: Install PHP pgsql package
+- name: Install PHP mysql package
   notify: Reload apache
   ansible.builtin.package:
     state: present
