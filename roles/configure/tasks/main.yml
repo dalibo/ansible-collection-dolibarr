@@ -37,6 +37,16 @@
     cmd: php step2.php set
     chdir: "{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/install/"
     creates: "{{ dolibarr_main_data_root }}/install.lock"
+  failed_when: false
+  become: true
+  become_user: "{{ dolibarr_http_user }}"
+
+- name: Run step5.php to init the database
+  ansible.builtin.command:
+    cmd: php step5.php {{ dolibarr_version }} {{ dolibarr_version }} fr set  admin admin admin
+    chdir: "{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/install/"
+    creates: "{{ dolibarr_main_data_root }}/install.lock"
+  failed_when: false
   become: true
   become_user: "{{ dolibarr_http_user }}"
 
