@@ -3,20 +3,10 @@ driver:
   name: docker
 platforms:
   - name: instance
-    image: "geerlingguy/docker-${MOLECULE_DISTRO:-debian10}-ansible:latest"
-    command: ${MOLECULE_DOCKER_COMMAND:-""}
-    pre_build_image: true
-    networks:
-      - name: dolibarr
+    image: "debian:bookworm-slim"
+    command: /lib/systemd/systemd
     privileged: true
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    dockerfile: Dockerfile
+    pre_build_image: false
 provisioner:
   name: ansible
-  env:
-    ANSIBLE_ROLES_PATH: ${MOLECULE_PROJECT_DIRECTORY}/roles
-  log: True
-verifier:
-  name: ansible
-  playbooks:
-    converge: ${MOLECULE_PLAYBOOK:-converge.yml}
