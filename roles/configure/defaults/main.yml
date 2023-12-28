@@ -1,5 +1,6 @@
 ---
 # defaults file for configure
+dolibarr_version: 18.0
 dolibarr_http_user: www-data
 dolibarr_http_group: www-data
 dolibarr_http_rootdir: /var/www/

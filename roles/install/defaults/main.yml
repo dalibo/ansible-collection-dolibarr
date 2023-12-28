@@ -1,6 +1,6 @@
 ---
 # defaults file for install
-dolibarr_version: 12.0
+dolibarr_version: 18.0
 dolibarr_http_rootdir: /var/www/
 dolibarr_domain: dolibarr.example.com
 dolibarr_http_user: www-data
