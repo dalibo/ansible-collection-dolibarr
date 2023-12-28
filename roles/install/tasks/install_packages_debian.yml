@@ -1,5 +1,6 @@
 ---
 - name: Install PHP common packages
+  notify: Reload apache
   apt:
     state: present
     name:
@@ -16,6 +17,7 @@
       - php-curl
 
 - name: Install PHP pgsql package
+  notify: Reload apache
   apt:
     state: present
     name:
@@ -23,6 +25,7 @@
   when: dolibarr_main_db_type == 'pgsql'
 
 - name: Install PHP pgsql package
+  notify: Reload apache
   apt:
     state: present
     name:
