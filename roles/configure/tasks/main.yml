@@ -1,5 +1,14 @@
 ---
 # tasks file for configure
+- name: Create documents directory
+  ansible.builtin.file:
+    state: directory
+    path: "{{ dolibarr_main_data_root }}"
+    owner: "{{ dolibarr_http_user }}"
+    group: "{{ dolibarr_http_user }}"
+    mode: "0750"
+
+
 - name: Template configuration file
   ansible.builtin.template:
     src: conf.php.jinja2
