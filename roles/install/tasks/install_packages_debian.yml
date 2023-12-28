@@ -1,7 +1,7 @@
 ---
 - name: Install PHP common packages
   notify: Reload apache
-  apt:
+  ansible.builtin.package:
     state: present
     name:
       - php-intl
@@ -18,7 +18,7 @@
 
 - name: Install PHP pgsql package
   notify: Reload apache
-  apt:
+  ansible.builtin.package:
     state: present
     name:
       - php-pgsql
@@ -26,7 +26,7 @@
 
 - name: Install PHP pgsql package
   notify: Reload apache
-  apt:
+  ansible.builtin.package:
     state: present
     name:
       - php-mysql
