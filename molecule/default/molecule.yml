@@ -1,10 +1,6 @@
 ---
 driver:
   name: docker
-dependency:
-  name: galaxy
-  options:
-    requirements-file: molecule/default/requirements.yml
 platforms:
   - name: instance
     image: "geerlingguy/docker-${MOLECULE_DISTRO:-debian10}-ansible:latest"

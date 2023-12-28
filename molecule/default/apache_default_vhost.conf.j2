@@ -1,0 +1,8 @@
+<VirtualHost *:80>
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/dolibarr.example.com
+        ServerName dolibarr.example.com
+        ServerAlias {{ ansible_default_ipv4.address }}
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
