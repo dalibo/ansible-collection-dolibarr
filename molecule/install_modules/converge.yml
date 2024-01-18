@@ -1,0 +1,11 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    dolibarr_modules:
+      - name: subtotal
+        version: 3.23
+        repo_url: https://github.com/ATM-Consulting/dolibarr_module_subtotal.git
+        activated: true
+  roles:
+    - role: l00ptr.dolibarr.install_module

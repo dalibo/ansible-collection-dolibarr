@@ -1,0 +1,12 @@
+---
+driver:
+  name: docker
+platforms:
+  - name: instance
+    image: debian:bookworm-slim
+    command: /lib/systemd/systemd
+    privileged: true
+    dockerfile: ../default/Dockerfile
+    pre_build_image: false
+provisioner:
+  name: ansible
