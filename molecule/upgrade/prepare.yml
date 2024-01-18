@@ -1,0 +1,15 @@
+---
+- name: Install mariadb
+  hosts: all
+  vars:
+    dolibarr_version: 17.0
+  tasks:
+    - name: Configure Apache and MariaDB
+      ansible.builtin.include_tasks:
+        file: ../default/config_apache_and_mariadb.yml
+    - name: Include dolibarr install
+      ansible.builtin.include_role:
+        name: l00ptr.dolibarr.install
+    - name: Include dolibarr configure
+      ansible.builtin.include_role:
+        name: l00ptr.dolibarr.configure
