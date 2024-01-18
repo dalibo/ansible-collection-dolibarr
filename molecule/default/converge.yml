@@ -2,20 +2,6 @@
 - name: Converge
   hosts: all
   vars:
-  pre_tasks:
-    - name: Update apt cache.
-      apt: update_cache=yes cache_valid_time=600
-      when: ansible_os_family == 'Debian'
-      changed_when: false
-    - name: Install GPG
-      apt:
-        name:
-          - gpg
-          - git
-          - rsync
-        state: present
-      when: ansible_os_family == 'Debian'
-      changed_when: false
   roles:
-    - install
-    - configure
+    - role: l00ptr.dolibarr.install
+    - role: l00ptr.dolibarr.configure
