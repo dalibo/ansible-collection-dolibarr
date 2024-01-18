@@ -1,22 +1,17 @@
 ---
 # This is an example playbook to execute Ansible tests.
-
 - name: Verify
   hosts: all
   gather_facts: false
   tasks:
-  - name: Verify web server is running
-    uri:
-      url: http://localhost/
-      status_code: 200
-      return_content: true
-      headers:
-        Host: dolibarr.example.com
-    register: result_get_dolibarr
-  - name: Debug
-    debug:
-      msg: '{{ result_get_auth_portal }}'
-  - name: Check if Dolibarr is present into response
-    assert:
-      that:
-        - "'Dolibarr' in result_get_dolibarr.content"
+    - name: Verify web server is running
+      ansible.builtin.uri:
+        url: http://localhost/
+        status_code: 200
+        return_content: true
+        headers:
+          Host: dolibarr.example.com
+      register: result_get_dolibarr
+    - name: Check if Dolibarr is present into response
+      ansible.builtin.assert:
+        that: ["'Dolibarr' in result_get_dolibarr.content"]
