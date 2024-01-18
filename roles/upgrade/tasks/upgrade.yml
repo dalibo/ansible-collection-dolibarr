@@ -1,39 +1,43 @@
 ---
+- name: Create tempory dir
+  ansible.builtin.tempfile:
+    state: directory
+    suffix: temp
+  register: temp_dir_creation
 - name: Set Facts temp directory
-  set_fact:
-    temp_dir: "/tmp/ansible-dolibarr-{{dolibarr_env}}-upgrade-{{  ansible_date_time.epoch }}-{{ dolibarr_version }}"
-    lock: "{{ dolibarr_main_document_root }}/documents/install.lock"
-
+  ansible.builtin.set_fact:
+    temp_dir: '{{ temp_dir_creation.path }}'
+    lock: '{{ dolibarr_main_data_root }}/install.lock'
+    current_full_version: "{{ (dolibarr_current_installed_version | string |  split('.'))[0] + '.0.0' }}"
+    next_full_version: "{{ (dolibarr_version | string | split('.'))[0] + '.0.0' }}"
 - name: create a temp directory
-  file:
-    path: "{{ temp_dir }}"
+  ansible.builtin.file:
+    path: '{{ temp_dir }}'
     state: directory
     mode: 0777
-
 - name: remove lock {{ lock }}
-  file:
-    path: "{{ lock }}"
+  ansible.builtin.file:
+    path: '{{ lock }}'
     state: absent
-
 - name: upgrade the database (step 1/3)
-  shell: php upgrade.php {{ current_version }}.0 {{ dolibarr_version }}.0 > {{ temp_dir }}/output1.html
+  ansible.builtin.shell: |
+    php upgrade.php {{ current_full_version }} {{ next_full_version }} > {{ temp_dir }}/output1.html
   args:
     chdir: '{{ dolibarr_main_document_root }}/install/'
-
 - name: upgrade the database (step 2/3)
-  shell: php upgrade2.php {{ current_version }}.0 {{ dolibarr_version }}.0 > {{ temp_dir }}/output2.html
+  ansible.builtin.shell: |
+    php upgrade2.php {{ current_full_version }} {{ next_full_version }} > {{ temp_dir }}/output2.html
   args:
     chdir: '{{ dolibarr_main_document_root }}/install/'
-
 - name: upgrade the database (step 3/3)
-  shell: php step5.php {{ current_version }}.0 {{ dolibarr_version }}.0 > {{ temp_dir }}/output3.html
+  ansible.builtin.shell: |
+    php step5.php {{ current_full_version }} {{ next_full_version }} > {{ temp_dir }}/output3.html
   args:
     chdir: '{{ dolibarr_main_document_root }}/install/'
-
 - name: restore lock
   become: true
   become_user: root
-  file:
-    path: "{{ lock }}"
+  ansible.builtin.file:
+    path: '{{ lock }}'
     state: touch
     mode: 0444

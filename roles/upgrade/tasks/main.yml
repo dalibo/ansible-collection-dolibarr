@@ -1,3 +1,9 @@
 ---
 # tasks file for upgrade
-- include: upgrade.yml
+- name: Git clone source and synchronyse to http dir (re-using install tasks)
+  ansible.builtin.include_role:
+    name: l00ptr.dolibarr.install
+    tasks_from: install_source.yml
+- ansible.builtin.include_tasks: upgrade.yml
+  when: (dolibarr_current_installed_version is defined and dolibarr_current_installed_version
+    != dolibarr_version)
