@@ -1,0 +1,6 @@
+---
+dolibarr_modules: []
+dolibarr_http_rootdir: /var/www/
+dolibarr_domain: dolibarr.example.com
+dolibarr_main_document_root: '{{ dolibarr_http_rootdir }}{{ dolibarr_domain }}/'
+dolibarr_modules_directory: '{{ dolibarr_main_document_root }}custom'

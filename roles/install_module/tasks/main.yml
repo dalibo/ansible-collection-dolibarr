@@ -1,2 +1,11 @@
 ---
-# tasks file for install_module
+- name: Add script to enable/disable module
+  ansible.builtin.copy:
+    src: usr/local/bin/control_module.php
+    dest: '{{ dolibarr_module_control_script }}'
+    owner: root
+    group: root
+    mode: '0755'
+- name: Install module
+  ansible.builtin.include_tasks: install_module.yml
+  loop: '{{ dolibarr_modules }}'
