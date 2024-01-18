@@ -1,8 +1,8 @@
 ---
 # tasks file for synchronise
 - name: Synchronize datastore
-  synchronize:
-    src: "{{ dolibarr_sync_directory_src }}"
-    dest: "{{ dolibarr_sync_directory_dest }}"
-    rsync_opts: "{{ dolibarr_sync_directory_rsync_options }}"
-  delegate_to: "{{ dolibarr_sync_src_host }}"
+  ansible.builtin.synchronize:
+    src: '{{ dolibarr_sync_directory_src }}'
+    dest: '{{ dolibarr_sync_directory_dest }}'
+    rsync_opts: '{{ omit if dolibarr_sync_directory_rsync_options is not defined }}'
+  delegate_to: '{{ dolibarr_sync_src_host }}'
