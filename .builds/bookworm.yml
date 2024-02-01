@@ -2,6 +2,7 @@
 image: debian/bookworm
 packages:
   - python3-pip
+  - python3-venv
   - dbus-user-session
   - systemd
   - rsync
