@@ -1,0 +1,21 @@
+---
+image: debian/bookworm
+packages:
+  - python3-pip
+  - dbus-user-session
+  - systemd
+  - rsync
+  - docker.io
+  - apparmor
+sources:
+  - https://git.sr.ht/~l00ptr/ansible-dolibarr
+tasks:
+  - setup: |
+      sudo usermod -aG docker $USER
+      sudo systemctl start docker
+      cd ansible-dolibarr
+      pip install -r requirements-dev.txt
+  - tests: |
+      export PATH="$HOME/.local/bin:$PATH"
+      cd ansible-dolibarr
+      molecule test --all
