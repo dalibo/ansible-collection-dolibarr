@@ -19,7 +19,7 @@ tasks:
       source .venv/bin/activate
       pip install -r requirements-dev.txt
   - tests: |
-      source .venv/bin/activate
       export PATH="$HOME/.local/bin:$PATH"
       cd ansible-dolibarr
+      source .venv/bin/activate
       molecule test --all
