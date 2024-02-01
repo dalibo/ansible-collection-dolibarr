@@ -2,4 +2,5 @@
 - name: Install mariadb
   hosts: all
   tasks:
-    ansible.builtin.include_tasks: configure_apache_and_mariadb.yml
+    - name: Install mariadb
+      ansible.builtin.include_tasks: config_apache_and_mariadb.yml
