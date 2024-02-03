@@ -1,21 +1,28 @@
 ---
 # tasks file for configure
-- name: Create documents directory
-  ansible.builtin.file:
-    state: directory
-    path: "{{ dolibarr_main_data_root }}"
-    owner: "{{ dolibarr_http_user }}"
-    group: "{{ dolibarr_http_user }}"
-    mode: "0750"
+- name: Create directories (for document and config)
+  block:
+    - name: Create documents directory
+      ansible.builtin.file:
+        path: '{{ dolibarr_main_data_root }}'
+        state: directory
+        owner: '{{ dolibarr_http_user }}'
+        group: '{{ dolibarr_http_user }}'
+        mode: '0740'
 
+- name: Test if lock file exist
+  ansible.builtin.stat:
+    path: '{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/conf/conf.php'
+  register: dolibarr_conf_file
 
 - name: Template configuration file
+  when: not dolibarr_conf_file.stat.exists
   ansible.builtin.template:
     src: conf.php.jinja2
-    dest: "{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/conf/conf.php"
-    owner: "{{ dolibarr_http_user }}"
-    group: "{{ dolibarr_http_user }}"
-    mode: "0740"
+    dest: '{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/conf/conf.php'
+    owner: '{{ dolibarr_http_user }}'
+    group: '{{ dolibarr_http_user }}'
+    mode: '0740'
 
 - name: Run step1.php to init the database
   ansible.builtin.command:
@@ -27,33 +34,40 @@
       {{ dolibarr_main_db_type }} {{ dolibarr_main_db_host }}
       {{ dolibarr_main_db_name }} {{ dolibarr_main_db_user }}
       {{ dolibarr_main_db_pass }} {{ dolibarr_main_db_port }} llx_
-    chdir: "{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/install/"
-    creates: "{{ dolibarr_main_data_root }}/install.lock"
+    chdir: '{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/install/'
+    creates: '{{ dolibarr_main_data_root }}/install.lock'
   become: true
-  become_user: "{{ dolibarr_http_user }}"
+  become_user: '{{ dolibarr_http_user }}'
 
 - name: Run step2.php to init the database
   ansible.builtin.command:
     cmd: php step2.php set
-    chdir: "{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/install/"
-    creates: "{{ dolibarr_main_data_root }}/install.lock"
+    chdir: '{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/install/'
+    creates: '{{ dolibarr_main_data_root }}/install.lock'
   failed_when: false
   become: true
-  become_user: "{{ dolibarr_http_user }}"
+  become_user: '{{ dolibarr_http_user }}'
 
 - name: Run step5.php to init the database
   ansible.builtin.command:
-    cmd: php step5.php {{ dolibarr_version }} {{ dolibarr_version }} fr set  admin admin admin
-    chdir: "{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/install/"
-    creates: "{{ dolibarr_main_data_root }}/install.lock"
+    cmd: php step5.php {{ dolibarr_version }} {{ dolibarr_version }} fr set  admin
+      admin admin
+    chdir: '{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/install/'
+    creates: '{{ dolibarr_main_data_root }}/install.lock'
   failed_when: false
   become: true
-  become_user: "{{ dolibarr_http_user }}"
+  become_user: '{{ dolibarr_http_user }}'
+
+- name: Test if lock file exist
+  ansible.builtin.stat:
+    path: '{{ dolibarr_main_data_root }}/install.lock'
+  register: dolibarr_lock_file
 
 - name: Lock install and upgrade process
+  when: not dolibarr_lock_file.stat.exists
   ansible.builtin.file:
-    path: "{{ dolibarr_main_data_root }}/install.lock"
+    path: '{{ dolibarr_main_data_root }}/install.lock'
     state: touch
     owner: root
     group: root
-    mode: "0444"
+    mode: '0444'

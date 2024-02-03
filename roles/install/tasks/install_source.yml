@@ -13,22 +13,25 @@
     state: directory
     owner: "{{ dolibarr_http_user }}"
     group: "{{ dolibarr_http_group }}"
-    recurse: true
+
+- name: Create Dolibarr config directory
+  become_user: "{{ dolibarr_http_group }}"
+  become: true
+  ansible.builtin.file:
+    dest: "{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/conf/"
+    state: directory
+
+- name: Test if configuration file exist
+  ansible.builtin.stat:
+    path: "{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/conf/conf.php"
+  register: config_file
 
 - name: Synchronize source code to web server directory
   ansible.posix.synchronize:
     src: "/usr/local/src/dolibarr_{{ dolibarr_version }}/htdocs/"
     dest: "{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/"
+    rsync_opts: '{{ ["--exclude=conf/"] if config_file.stat.exists else omit }}'
+  become: true
+  become_user: "{{ dolibarr_http_user }}"
   delegate_to: "{{ inventory_hostname }}"
 
-- name: Create empty configuration file
-  ansible.builtin.file:
-    path: "{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/conf/conf.php"
-    state: touch
-
-- name: Set web server owner of dolibarr files
-  ansible.builtin.file:
-    path: "{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}"
-    owner: "{{ dolibarr_http_user }}"
-    group: "{{ dolibarr_http_group }}"
-    mode: '0755'
