@@ -6,7 +6,7 @@ platforms:
     image: "debian:bookworm-slim"
     command: /lib/systemd/systemd
     privileged: true
-    dockerfile: Dockerfile
+    dockerfile: ../../.config/molecule/Dockerfile
     pre_build_image: false
 provisioner:
   name: ansible
