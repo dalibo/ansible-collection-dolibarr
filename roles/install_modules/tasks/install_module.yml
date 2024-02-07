@@ -8,7 +8,10 @@
   ansible.posix.synchronize:
     src: /usr/local/src/{{ item.name }}_{{ item.version }}/
     dest: '{{ dolibarr_modules_directory }}/{{ item.name }}/'
+    rsync_opts: [--exclude=.git/]
   delegate_to: '{{ inventory_hostname }}'
+  become_user: '{{ dolibarr_http_user }}'
+  become: true
 - name: Set module activation action
   ansible.builtin.set_fact:
     activation_action: "{{ 'activate' if  (item.activated | default(false)) else 'deactivate' }}"

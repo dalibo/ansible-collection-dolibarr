@@ -1,4 +1,6 @@
 ---
+dolibarr_http_user: www-data
+dolibarr_http_group: www-data
 dolibarr_modules: []
 dolibarr_http_rootdir: /var/www/
 dolibarr_domain: dolibarr.example.com
