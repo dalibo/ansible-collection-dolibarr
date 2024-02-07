@@ -16,3 +16,5 @@
   ansible.builtin.command:
     cmd: '{{ dolibarr_module_control_script }} --data_root={{ dolibarr_main_document_root }}
       --module=mod{{ item.name | capitalize }} --action={{ activation_action }}'
+  changed_when: ((manage_module.stdout | from_json).changed_modules | int) != 0
+  register: manage_module

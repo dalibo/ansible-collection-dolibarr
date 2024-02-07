@@ -7,7 +7,6 @@
 
 // This is a CLI script
 if (! defined('STDIN')) exit(1);
-echo count($argv);
 // all parameters are mandatory
 if (count($argv) != 4) exit(2);
 
@@ -22,19 +21,26 @@ $param=getopt(null,$opt);
 // Load
 require_once ($param['data_root']."/master.inc.php");
 dol_include_once('/core/lib/admin.lib.php');
-
+$exit_code=3;
+$count_change=0;
 // Action
 switch ($param['action']) {
-    case 'deactivate':
-        unActivateModule($param['module']);
-        break;
     case 'activate':
-        activateModule($param['module']);
+        $ret=activateModule($param['module']);
+        // because we currently don't desactivate dependencies nbmodules should
+        // be equal to 1
+        $exit_code = (count($ret['errors'])==0) ? 0 : $exit_code;
+        $count_change = $ret['nbmodules'];
         break;
-    default:
-        exit(3);
+    case 'deactivate':
+        $ret=unActivateModule($param['module']);
+        if($ret===''){
+                $exit_code=0;
+                $count_change=1;
+        }
+        break;
 }
 
-exit(0);
-
+print(json_encode(array("changed_modules"=> $count_change)));
+exit($exit_code);
 ?>
