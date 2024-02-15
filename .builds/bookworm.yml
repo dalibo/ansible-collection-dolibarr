@@ -14,12 +14,12 @@ tasks:
   - setup: |
       sudo usermod -aG docker $USER
       sudo systemctl start docker
-      cd ansible-dolibarr
       python3 -m venv --upgrade-deps .venv
       source .venv/bin/activate
+      cd ansible-dolibarr
       pip install -r requirements-dev.txt
   - tests: |
       export PATH="$HOME/.local/bin:$PATH"
-      cd ansible-dolibarr
       source .venv/bin/activate
+      cd ansible-dolibarr
       molecule test --all
