@@ -2,8 +2,8 @@
 - name: Converge
   hosts: all
   vars:
-    dolibarr_sync_directory_src: /var/www/dolibarr.example.com
-    dolibarr_sync_directory_dest: /var/www/dolibarr.example.com_2
+    dolibarr_sync_directory_src: /var/www/dolibarr.example.com/
+    dolibarr_sync_directory_dest: /var/www/dolibarr.example.com_2/
     dolibarr_sync_src_host: '{{ inventory_hostname }}'
   roles:
     - role: l00ptr.dolibarr.synchronize

@@ -17,3 +17,12 @@
         that:
           - "'Dolibarr' in result_get_dolibarr.content"
           - "'18.0' in result_get_dolibarr.content"
+    - name: Verify synchronized dolibarr contains file
+      ansible.builtin.lineinfile:
+        dest: /var/www/dolibarr.example.com_2/filefunc.inc.php
+        regex: .*define\('DOL_VERSION', '18.0
+        state: absent
+      changed_when: false
+      check_mode: true
+      register: result
+      failed_when: result.found == 0
