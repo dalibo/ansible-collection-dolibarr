@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Julian Vanden Broeck
-  description: Install and manage (activate / deactivate) Dolibarr module
+  description: Install and manage (activate / deactivate) Dolibarr module.
   license: MIT
   min_ansible_version: '2.16'
   platforms:
