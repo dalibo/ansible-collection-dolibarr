@@ -1,2 +1,18 @@
 ---
 # Use mutualized config on .config/molecule dir
+scenario:
+  test_sequence:
+    - dependency
+    - cleanup
+    - destroy
+    - syntax
+    - create
+    - prepare
+    - converge
+    # Disable itempotence because this role is not currently
+    # designed to run multiple time
+    #    - idempotence
+    - side_effect
+    - verify
+    - cleanup
+    - destroy
