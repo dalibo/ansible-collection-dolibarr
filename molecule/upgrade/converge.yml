@@ -2,8 +2,7 @@
 - name: Converge
   hosts: all
   vars:
+    dolibarr_current_installed_version: 17.0
+    dolibarr_version: 18.0
   roles:
     - role: l00ptr.dolibarr.upgrade
-      vars:
-        dolibarr_current_installed_version: 17.0
-        dolibarr_version: 18.0

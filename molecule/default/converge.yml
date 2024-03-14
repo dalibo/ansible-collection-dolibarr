@@ -1,7 +1,6 @@
 ---
 - name: Converge
   hosts: all
-  vars:
   roles:
     - role: l00ptr.dolibarr.install
     - role: l00ptr.dolibarr.configure
