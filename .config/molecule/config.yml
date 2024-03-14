@@ -3,7 +3,7 @@ driver:
   name: docker
 platforms:
   - name: instance
-    image: "debian:bookworm-slim"
+    image: debian:bookworm-slim
     command: /lib/systemd/systemd
     privileged: true
     dockerfile: ../../.config/molecule/Dockerfile
