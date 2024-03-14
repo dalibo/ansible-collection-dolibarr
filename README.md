@@ -14,11 +14,11 @@ Currently we provide those roles :
 We try to keep variable name consistent between the roles composing this
 collection.
 
-This collection is currently only tested on Debian 9 and 10.
+This collection is currently only tested on Debian 12.
 
 ## Tested with Ansible
 
-2.10
+2.16
 
 For more information about our testing procedure, you can read the the
 [dedicated howto](docs/testing.md)
