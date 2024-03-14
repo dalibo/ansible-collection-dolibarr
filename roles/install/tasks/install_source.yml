@@ -13,7 +13,7 @@
     state: directory
     owner: '{{ dolibarr_http_user }}'
     group: '{{ dolibarr_http_group }}'
-    mode: '0750'
+    mode: '0755'
 
 - name: install_source | Create Dolibarr config directory
   become_user: '{{ dolibarr_http_group }}'
@@ -21,7 +21,9 @@
   ansible.builtin.file:
     dest: '{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/conf/'
     state: directory
-    mode: '0550'
+    owner: '{{ dolibarr_http_user }}'
+    group: '{{ dolibarr_http_group }}'
+    mode: '0755'
 
 - name: install_source | Test if configuration file exist
   ansible.builtin.stat:

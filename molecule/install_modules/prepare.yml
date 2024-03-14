@@ -1,12 +1,11 @@
 ---
+- name: Import playbook for apache and mariadb
+  ansible.builtin.import_playbook: ../default/config_apache_and_mariadb.yml
 - name: Install mariadb
   hosts: all
   vars:
     dolibarr_version: 17.0
   tasks:
-    - name: Configure Apache and MariaDB
-      ansible.builtin.include_tasks:
-        file: ../default/config_apache_and_mariadb.yml
     - name: Include dolibarr install
       ansible.builtin.include_role:
         name: l00ptr.dolibarr.install
