@@ -1,5 +1,5 @@
 ---
-- name: Install PHP common packages
+- name: install_packages_debian | Install PHP common packages
   notify: Reload apache
   ansible.builtin.package:
     state: present
@@ -16,7 +16,7 @@
       - php-zip
       - php-curl
 
-- name: Install PHP pgsql package
+- name: install_packages_debian | Install PHP pgsql package
   notify: Reload apache
   ansible.builtin.package:
     state: present
@@ -24,7 +24,7 @@
       - php-pgsql
   when: dolibarr_main_db_type == 'pgsql'
 
-- name: Install PHP mysql package
+- name: install_packages_debian | Install PHP mysql package
   notify: Reload apache
   ansible.builtin.package:
     state: present

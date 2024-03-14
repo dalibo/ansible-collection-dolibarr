@@ -1,10 +1,10 @@
 ---
-- name: Clone (using git) dolibarr module
+- name: install_module | Clone (using git) dolibarr module
   ansible.builtin.git:
     repo: '{{ item.repo_url }}'
     dest: /usr/local/src/{{ item.name }}_{{ item.version }}
     version: '{{ item.version }}'
-- name: Copy in custom dir of Dolibarr
+- name: install_module | Copy in custom dir of Dolibarr
   ansible.posix.synchronize:
     src: /usr/local/src/{{ item.name }}_{{ item.version }}/
     dest: '{{ dolibarr_modules_directory }}/{{ item.name }}/'
@@ -12,9 +12,9 @@
   delegate_to: '{{ inventory_hostname }}'
   become_user: '{{ dolibarr_http_user }}'
   become: true
-- name: Set module activation action
+- name: install_module | Set module activation action
   ansible.builtin.set_fact:
-    activation_action: "{{ 'activate' if  (item.activated | default(false)) else 'deactivate' }}"
+    activation_action: "{{ 'activate' if (item.activated | default(false)) else 'deactivate' }}"
 - name: install_module | Activate/deactivate module
   ansible.builtin.command:
     cmd: '{{ dolibarr_module_control_script }} --data_root={{ dolibarr_main_document_root }}

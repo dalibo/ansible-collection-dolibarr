@@ -4,4 +4,4 @@ dolibarr_version: 18.0
 dolibarr_http_rootdir: /var/www/
 dolibarr_domain: dolibarr.example.com
 dolibarr_main_document_root: '{{ dolibarr_http_rootdir }}{{ dolibarr_domain }}/'
-dolibarr_main_data_root: '{{ dolibarr_http_rootdir }}{{ dolibarr_domain}}_documents/'
+dolibarr_main_data_root: '{{ dolibarr_http_rootdir }}{{ dolibarr_domain }}_documents/'

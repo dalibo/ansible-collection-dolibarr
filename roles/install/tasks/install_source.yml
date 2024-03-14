@@ -1,37 +1,38 @@
 ---
 # tasks file for install dolibarr
-- name: Clone repository
+- name: install_source | Clone repository
   ansible.builtin.git:
     repo: https://github.com/Dolibarr/dolibarr.git
-    version: "{{ dolibarr_version }}"
+    version: '{{ dolibarr_version }}'
     depth: 1
-    dest: "/usr/local/src/dolibarr_{{ dolibarr_version }}"
+    dest: /usr/local/src/dolibarr_{{ dolibarr_version }}
 
-- name: Create Dolibarr install directory
+- name: install_source | Create Dolibarr install directory
   ansible.builtin.file:
-    dest: "{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/"
+    dest: '{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/'
     state: directory
-    owner: "{{ dolibarr_http_user }}"
-    group: "{{ dolibarr_http_group }}"
+    owner: '{{ dolibarr_http_user }}'
+    group: '{{ dolibarr_http_group }}'
+    mode: '0750'
 
-- name: Create Dolibarr config directory
-  become_user: "{{ dolibarr_http_group }}"
+- name: install_source | Create Dolibarr config directory
+  become_user: '{{ dolibarr_http_group }}'
   become: true
   ansible.builtin.file:
-    dest: "{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/conf/"
+    dest: '{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/conf/'
     state: directory
+    mode: '0550'
 
-- name: Test if configuration file exist
+- name: install_source | Test if configuration file exist
   ansible.builtin.stat:
-    path: "{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/conf/conf.php"
+    path: '{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/conf/conf.php'
   register: config_file
 
-- name: Synchronize source code to web server directory
+- name: install_source | Synchronize source code to web server directory
   ansible.posix.synchronize:
-    src: "/usr/local/src/dolibarr_{{ dolibarr_version }}/htdocs/"
-    dest: "{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/"
+    src: /usr/local/src/dolibarr_{{ dolibarr_version }}/htdocs/
+    dest: '{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/'
     rsync_opts: '{{ ["--exclude=conf/"] if config_file.stat.exists else omit }}'
   become: true
-  become_user: "{{ dolibarr_http_user }}"
-  delegate_to: "{{ inventory_hostname }}"
-
+  become_user: '{{ dolibarr_http_user }}'
+  delegate_to: '{{ inventory_hostname }}'
