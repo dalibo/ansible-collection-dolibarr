@@ -9,7 +9,7 @@ Currently we provide those roles :
 -   [Install](docs/role_install.md)
 -   [Configure](docs/role_configure.md)
 -   [Upgrade](docs/role_upgrade.md)
--   [Sync](docs/role_sync.md)
+-   [Sync](docs/role_synchronize.md)
 
 We try to keep variable name consistent between the roles composing this
 collection.
