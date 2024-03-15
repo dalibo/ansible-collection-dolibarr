@@ -45,10 +45,10 @@ also use (and we encourage it) `postgres`.
 ## Dependencies
 
 This role is part of a collection to install and manage your Dolibarr
-instance. We currently **does not** install:
+instance. It **does not** install:
 
--   the web server (and at this time, we only support Apache)
--   the database server
+-   The web server (and at this time, we only support/test with Apache)
+-   The database server
 -   PHP module for Apache nor php-fpm, but we install php packages
     required by Dolibarr.
 
