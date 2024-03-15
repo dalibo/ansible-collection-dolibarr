@@ -8,4 +8,4 @@
         repo_url: https://github.com/ATM-Consulting/dolibarr_module_subtotal.git
         activated: true
   roles:
-    - role: l00ptr.dolibarr.install_modules
+    - role: dalibo.dolibarr.install_modules

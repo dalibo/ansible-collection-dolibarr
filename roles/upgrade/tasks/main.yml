@@ -2,7 +2,7 @@
 # tasks file for upgrade
 - name: Git clone source and synchronyse to http dir (re-using install tasks)
   ansible.builtin.include_role:
-    name: l00ptr.dolibarr.install
+    name: dalibo.dolibarr.install
     tasks_from: install_source.yml
 - name: Include tasks file to upgrade dolibarr
   ansible.builtin.include_tasks: upgrade.yml

@@ -2,5 +2,5 @@
 - name: Converge
   hosts: all
   roles:
-    - role: l00ptr.dolibarr.install
-    - role: l00ptr.dolibarr.configure
+    - role: dalibo.dolibarr.install
+    - role: dalibo.dolibarr.configure

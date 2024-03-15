@@ -8,7 +8,7 @@
   tasks:
     - name: Include dolibarr install
       ansible.builtin.include_role:
-        name: l00ptr.dolibarr.install
+        name: dalibo.dolibarr.install
     - name: Include dolibarr configure
       ansible.builtin.include_role:
-        name: l00ptr.dolibarr.configure
+        name: dalibo.dolibarr.configure

@@ -1,4 +1,4 @@
-# Ansible Collection - l00ptr.dolibarr
+# Ansible Collection - dalibo.dolibarr
 
 ## Description
 
