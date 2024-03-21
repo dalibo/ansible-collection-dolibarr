@@ -8,7 +8,7 @@ description: Allow to manage the lifecycle of Dolibarr (install, upgrade, sync,.
 license: [MIT]
 tags: [dolibarr, webapp, linux, php]
 dependencies: {}
-repository: http://example.com/repository
-documentation: http://docs.example.com
-homepage: http://example.com
-issues: http://example.com/issue/tracker
+repository: https://github.com/dalibo/ansible-collection-dolibarr
+documentation: https://github.com/dalibo/ansible-collection-dolibarr
+homepage: http://www.dalibo.com
+issues: https://github.com/dalibo/-ansible-collection-dolibarr/issues
