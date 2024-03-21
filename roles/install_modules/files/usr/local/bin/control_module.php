@@ -27,7 +27,7 @@ $count_change=0;
 switch ($param['action']) {
     case 'activate':
         $ret=activateModule($param['module']);
-        // because we currently don't desactivate dependencies nbmodules should
+        // because we currently don't deactivate dependencies nbmodules should
         // be equal to 1
         $exit_code = (count($ret['errors'])==0) ? 0 : $exit_code;
         $count_change = $ret['nbmodules'];

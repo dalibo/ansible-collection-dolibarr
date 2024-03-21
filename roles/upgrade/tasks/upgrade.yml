@@ -1,5 +1,5 @@
 ---
-- name: upgrade | Create tempory dir
+- name: upgrade | Create temporary dir
   ansible.builtin.tempfile:
     state: directory
     suffix: temp

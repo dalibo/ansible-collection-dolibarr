@@ -20,14 +20,14 @@ This collection is currently only tested on Debian 12.
 
 2.16
 
-For more information about our testing procedure, you can read the the
+For more information about our testing procedure, you can read the
 [dedicated howto](docs/testing.md)
 
 ## Included content
 
 ## Using this collection
 
-Please refer to the examples in the readmes of the role.
+Please refer to the examples in the readme of the role.
 
 See [Ansible Using
 collections](https://docs.ansible.com/ansible/latest/user_guide/collections_using.html)
@@ -65,7 +65,7 @@ General information:
 
 Released under MIT License
 
-Copyright (c) 2020 Vanden Broeck Julian.
+Copyright (c) 2020 Julian Vanden Broeck.
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the

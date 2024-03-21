@@ -14,12 +14,12 @@ Currently out of scope:
 -   Backup of the code
 -   Rescuing in case of upgrade failure
 
-## Role varibales
-
-Version of Dolibarr we upgrade from (old version in place).
+## Role variables
 
     dolibarr_current_installed_version: 17.0
 
-Version of Dolibarr we upgrade to (new version).
+Version of Dolibarr we upgrade from (old version in place).
 
     dolibarr_version: 18.0
+
+Version of Dolibarr we upgrade to (new version).
