@@ -11,12 +11,23 @@
         mode: '0740'
 
 - name: Test if conf file exist
+  tags:
+    - dolibarr_enforce_generate_configuration
   ansible.builtin.stat:
     path: '{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/conf/conf.php'
   register: dolibarr_conf_file
 
+- name: Add variable to enforce config file generation
+  tags:
+    - dolibarr_enforce_generate_configuration
+    - never
+  ansible.builtin.set_fact:
+    __dolibarr_configure_enforce_config_creation: true
+
 - name: Template configuration file
-  when: not dolibarr_conf_file.stat.exists
+  when: not dolibarr_conf_file.stat.exists or __dolibarr_configure_enforce_config_creation
+  tags:
+    - dolibarr_enforce_generate_configuration
   ansible.builtin.template:
     src: conf.php.jinja2
     dest: '{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/conf/conf.php'
