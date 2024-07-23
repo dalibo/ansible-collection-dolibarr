@@ -10,7 +10,7 @@
         group: '{{ dolibarr_http_user }}'
         mode: '0740'
 
-- name: Test if lock file exist
+- name: Test if conf file exist
   ansible.builtin.stat:
     path: '{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/conf/conf.php'
   register: dolibarr_conf_file
