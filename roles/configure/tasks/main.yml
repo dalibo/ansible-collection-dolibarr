@@ -14,7 +14,7 @@
   tags:
     - dolibarr_enforce_generate_configuration
   ansible.builtin.stat:
-    path: '{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/conf/conf.php'
+    path: '{{ dolibarr_main_document_root }}/conf/conf.php'
   register: dolibarr_conf_file
 
 - name: Add variable to enforce config file generation
@@ -30,7 +30,7 @@
     - dolibarr_enforce_generate_configuration
   ansible.builtin.template:
     src: conf.php.jinja2
-    dest: '{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/conf/conf.php'
+    dest: '{{  dolibarr_main_document_root }}/conf/conf.php'
     owner: '{{ dolibarr_http_user }}'
     group: '{{ dolibarr_http_user }}'
     mode: '0740'
@@ -45,7 +45,7 @@
       {{ dolibarr_main_db_type }} {{ dolibarr_main_db_host }}
       {{ dolibarr_main_db_name }} {{ dolibarr_main_db_user }}
       {{ dolibarr_main_db_pass }} {{ dolibarr_main_db_port }} llx_
-    chdir: '{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/install/'
+    chdir: '{{  dolibarr_main_document_root }}//install/'
     creates: '{{ dolibarr_main_data_root }}/install.lock'
   become: true
   become_user: '{{ dolibarr_http_user }}'
@@ -53,7 +53,7 @@
 - name: Run step2.php to init the database
   ansible.builtin.command:
     cmd: php step2.php set
-    chdir: '{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/install/'
+    chdir: '{{  dolibarr_main_document_root }}/install/'
     creates: '{{ dolibarr_main_data_root }}/install.lock'
   failed_when: false
   become: true
@@ -63,7 +63,7 @@
   ansible.builtin.command:
     cmd: php step5.php {{ dolibarr_version }} {{ dolibarr_version }} fr set  admin
       admin admin
-    chdir: '{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/install/'
+    chdir: '{{  dolibarr_main_document_root }}/install/'
     creates: '{{ dolibarr_main_data_root }}/install.lock'
   failed_when: false
   become: true

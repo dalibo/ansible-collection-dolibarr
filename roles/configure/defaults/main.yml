@@ -5,9 +5,10 @@ dolibarr_http_user: www-data
 dolibarr_http_group: www-data
 dolibarr_http_rootdir: /var/www/
 dolibarr_domain: dolibarr.example.com
+dolibarr_http_dir: '{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}'
 dolibarr_http_proto: http
-dolibarr_main_document_root: '{{ dolibarr_http_rootdir }}{{ dolibarr_domain }}/'
-dolibarr_main_data_root: '{{ dolibarr_http_rootdir }}{{ dolibarr_domain }}_documents/'
+dolibarr_main_document_root: '{{ dolibarr_http_dir }}/'
+dolibarr_main_data_root: '{{ dolibarr_http_dir }}_documents/'
 dolibarr_main_db_type: mysqli
 dolibarr_main_db_host: localhost
 dolibarr_main_db_port: 3306
@@ -15,3 +16,4 @@ dolibarr_main_db_name: dolibarr
 dolibarr_main_db_user: dolibarr
 dolibarr_main_db_pass: dolibarr
 dolibarr_main_extra_config: ''
+dolibarr_main_instance_unique_id: FIXME

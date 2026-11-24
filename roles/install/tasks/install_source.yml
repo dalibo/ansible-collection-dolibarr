@@ -9,7 +9,7 @@
 
 - name: install_source | Create Dolibarr install directory
   ansible.builtin.file:
-    dest: '{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/'
+    dest: '{{ dolibarr_main_document_root }}/'
     state: directory
     owner: '{{ dolibarr_http_user }}'
     group: '{{ dolibarr_http_group }}'
@@ -19,7 +19,7 @@
   become_user: '{{ dolibarr_http_group }}'
   become: true
   ansible.builtin.file:
-    dest: '{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/conf/'
+    dest: '{{ dolibarr_main_document_root }}/conf/'
     state: directory
     owner: '{{ dolibarr_http_user }}'
     group: '{{ dolibarr_http_group }}'
@@ -33,7 +33,7 @@
 - name: install_source | Synchronize source code to web server directory
   ansible.posix.synchronize:
     src: /usr/local/src/dolibarr_{{ dolibarr_version }}/htdocs/
-    dest: '{{ dolibarr_http_rootdir }}/{{ dolibarr_domain }}/'
+    dest: '{{ dolibarr_main_document_root }}/'
     rsync_opts: '{{ ["--exclude=conf/"] if config_file.stat.exists else omit }}'
   become: true
   become_user: '{{ dolibarr_http_user }}'
